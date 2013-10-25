@@ -1,0 +1,14 @@
+{
+  "history": [
+    { "id": "birth",
+      "location": { "type": "FeatureCollection",
+                  "features": [
+                  { "type": "Feature",
+                    "geometry": {"type": "Point", "coordinates": [-72.65,42.3333]},
+                    "name": "Northampton, MA"
+                  }]
+                }
+    }
+
+  ]
+}

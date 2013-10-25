@@ -1,0 +1,41 @@
+$lines: #4D4D4D;
+$back: #FFF;
+$div-back: #E0E0E0;
+$div-box-radius: 3px;
+
+body{
+  width:100%;
+  height:100%;
+  color: $lines;
+  background-color: $back;
+}
+
+#content div {
+  background-color: $div-back;
+  -moz-box-shadow: 0 0 $div-box-radius $lines;
+  -webkit-box-shadow: 0 0 $div-box-radius $lines;
+  box-shadow: 0 0 $div-box-radius $lines;
+  -moz-border-radius: $div-box-radius;
+  -webkit-border-radius: $div-box-radius;
+  border-radius: $div-box-radius;
+  
+}
+#welcome {
+  height: 200px;
+  img { float: right; }
+  #social-grid {
+    float: right;
+    width: 40px;
+  }
+}
+#resume-section {
+  height: 350px; 
+}
+
+@media screen and (min-width: 1000px) {
+  #content {
+    width: 900px;
+    margin: 0 auto;
+  }
+}
+

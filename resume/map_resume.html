@@ -1,0 +1,55 @@
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+
+<link rel="stylesheet" type="text/css" href="/style.css">
+<script type="text/javascript" src="/static/d3.v3.js"></script>
+<script type="text/javascript" src="/static/topojson.js"></script>
+</head>
+
+<body>
+
+<div id='content'>
+  <div id='map'></div>
+
+  <div id='slider'></div>
+  <div id='explanation'>
+    <p>I've been following the trail of the pioneers west and have settled in San Francisco. See where I started and what kind of work I was doing on the way.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+var proj = d3.geo.albersUsa();
+var path = d3.geo.path().projection(proj);
+
+var height = 650;
+var width = 900;
+
+var svg = d3.select('#map').append('svg')
+  .attr('width', width)
+  .attr('height', height);
+var g = svg.append('g');
+var circ = svg.append('circle');
+d3.json('../static/us-states.json', function(us) {
+  g.selectAll('path')
+    .data(topojson.feature(us, us.objects.states).features)
+  .enter().append('path')
+    .attr('d', path)
+    .attr('id', function(d){return d.id})
+    .style('fill', 'gray')
+    .style('stroke', 'white')
+    .style('stroke-width', 1);
+});
+var loc_data = [[-72.65,42.3333],[-112.0785, 33]];
+d3.json('../static/emp.json', function(hist) {
+  var x =  svg.selectAll("locations")
+    .data(hist.history);
+  x.enter().append('circle')
+    .attr('cx', function(d){return proj(d.location.features[0].geometry.coordinates)[0]})
+    .attr('cy', function(d){return proj(d.location.features[0].geometry.coordinates)[1]})
+    .attr('r', 10)
+    .style('fill', 'red');
+});
+})();
+</script>
